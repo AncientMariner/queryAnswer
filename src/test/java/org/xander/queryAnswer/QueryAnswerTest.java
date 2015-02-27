@@ -16,13 +16,13 @@ public class QueryAnswerTest {
 
     @Test
     public void answerIfPresent() {
-        String actualAnswer = queryAnswer.checkValuePresent("cat");
+        String actualAnswer = queryAnswer.takeCareOfComplexity("cat");
         assertEquals("yes", actualAnswer);
     }
 
     @Test
     public void answerIfNotPresent() {
-        String actualAnswer = queryAnswer.checkValuePresent("elephant");
+        String actualAnswer = queryAnswer.takeCareOfComplexity("elephant");
         assertEquals("no", actualAnswer);
     }
 
@@ -34,70 +34,70 @@ public class QueryAnswerTest {
     @Test(expected = IllegalArgumentException.class)
     public void questionNotCorrect() {
         QueryAnswer queryAnswer = new QueryAnswer(new String[]{"2"});
-        queryAnswer.checkValuePresent(null);
+        queryAnswer.takeCareOfComplexity(null);
     }
 
     @Test
     public void zeroLengthArgument() {
         QueryAnswer queryAnswer = new QueryAnswer(new String[]{"2"});
-        assertEquals("no", queryAnswer.checkValuePresent(""));
+        assertEquals("no", queryAnswer.takeCareOfComplexity(""));
 
     }
 
     @Test
     public void zeroLengthArgumentPresent() {
         QueryAnswer queryAnswer = new QueryAnswer(new String[]{""});
-        assertEquals("yes", queryAnswer.checkValuePresent(""));
+        assertEquals("yes", queryAnswer.takeCareOfComplexity(""));
     }
 
     @Test
     public void emptySpaceArgument() {
         QueryAnswer queryAnswer = new QueryAnswer(new String[]{"   "});
-        assertEquals("yes", queryAnswer.checkValuePresent("   "));
+        assertEquals("yes", queryAnswer.takeCareOfComplexity("   "));
     }
 
     @Test
     public void onePlaceHolder() {
-        assertEquals("yes", queryAnswer.checkValuePresent("c*t"));
+        assertEquals("yes", queryAnswer.takeCareOfComplexity("c*t"));
     }
 
     @Test
     public void onePlaceHolderLastPosition() {
-        assertEquals("yes", queryAnswer.checkValuePresent("ca*"));
+        assertEquals("yes", queryAnswer.takeCareOfComplexity("ca*"));
     }
 
     @Test
     public void twoPlaceHoldersLastPosition() {
-        assertEquals("yes", queryAnswer.checkValuePresent("c**"));
+        assertEquals("yes", queryAnswer.takeCareOfComplexity("c**"));
     }
 
     @Test
     public void twoPlaceHoldersFirstPosition() {
-        assertEquals("yes", queryAnswer.checkValuePresent("**t"));
+        assertEquals("yes", queryAnswer.takeCareOfComplexity("**t"));
     }
 
     @Test
     public void onePlaceHolderFirstPosition() {
-        assertEquals("yes", queryAnswer.checkValuePresent("*at"));
+        assertEquals("yes", queryAnswer.takeCareOfComplexity("*at"));
     }
 
     @Test
     public void threePlaceHolders() {
-        assertEquals("yes", queryAnswer.checkValuePresent("***"));
+        assertEquals("yes", queryAnswer.takeCareOfComplexity("***"));
     }
 
     @Test
     public void fivePlaceHoldersNotPresent() {
-        assertEquals("yes", queryAnswer.checkValuePresent("******"));
+        assertEquals("yes", queryAnswer.takeCareOfComplexity("******"));
     }
 
     @Test
     public void fourPlaceHoldersNotPresent() {
-        assertEquals("no", queryAnswer.checkValuePresent("****"));
+        assertEquals("no", queryAnswer.takeCareOfComplexity("****"));
     }
 
     @Test
     public void wrongWordNotPresent() {
-        assertEquals("no", queryAnswer.checkValuePresent("catn"));
+        assertEquals("no", queryAnswer.takeCareOfComplexity("catn"));
     }
 }

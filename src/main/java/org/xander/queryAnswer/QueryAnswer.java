@@ -1,6 +1,8 @@
 package org.xander.queryAnswer;
 
 import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class QueryAnswer {
     final private String[] data;
@@ -36,6 +38,31 @@ public class QueryAnswer {
                     return "yes";
                 }
             }
+        }
+        return "no";
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder();
+        for (String a : data) {
+            result.append(a).append("\n");
+        }
+        return result.toString();
+    }
+
+    public String takeCareOfComplexity(String value) {
+        if (Objects.isNull(value)) {
+            throw new IllegalArgumentException("argument is not correct, please change it");
+        }
+        String allInOne = toString();
+        String valueForRegex = value.replace('*', '.');
+
+        Pattern pattern = Pattern.compile("^" + valueForRegex + "$", Pattern.MULTILINE);
+        Matcher matcher = pattern.matcher(allInOne);
+
+        if (matcher.find()) {
+            return "yes";
         }
         return "no";
     }
