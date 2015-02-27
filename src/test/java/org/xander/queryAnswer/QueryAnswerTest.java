@@ -3,10 +3,7 @@ package org.xander.queryAnswer;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNotNull;
 
 public class QueryAnswerTest {
     String[] data = {"cat", "dog", "parrot"};
@@ -31,7 +28,7 @@ public class QueryAnswerTest {
 
     @Test(expected = IllegalStateException.class)
     public void noAnswersPresent() {
-        QueryAnswer queryAnswer = new QueryAnswer(new String[]{});
+        new QueryAnswer(new String[]{});
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -45,6 +42,18 @@ public class QueryAnswerTest {
         QueryAnswer queryAnswer = new QueryAnswer(new String[]{"2"});
         assertEquals("no", queryAnswer.checkValuePresent(""));
 
+    }
+
+    @Test
+    public void zeroLengthArgumentPresent() {
+        QueryAnswer queryAnswer = new QueryAnswer(new String[]{""});
+        assertEquals("yes", queryAnswer.checkValuePresent(""));
+    }
+
+    @Test
+    public void emptySpaceArgument() {
+        QueryAnswer queryAnswer = new QueryAnswer(new String[]{"   "});
+        assertEquals("yes", queryAnswer.checkValuePresent("   "));
     }
 
     @Test
