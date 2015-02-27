@@ -1,19 +1,20 @@
 package org.xander.queryAnswer;
 
+import java.util.Objects;
+
 public class QueryAnswer {
-    private String[] data;
+    final private String[] data;
 
     public QueryAnswer(String[] data) {
+        if (data.length == 0) {
+            throw new IllegalStateException("data is not filled, not able to check");
+        }
         this.data = data;
     }
 
-    public String[] getData() {
-        return data;
-    }
-
     public String checkValuePresent(String value) {
-        if (data.length == 0) {
-            throw new IllegalStateException("data is not filled, not able to check");
+        if (Objects.isNull(value)) {
+            throw new IllegalArgumentException("argument is not correct, please change it");
         }
 
         char[] valueChars = value.toCharArray();

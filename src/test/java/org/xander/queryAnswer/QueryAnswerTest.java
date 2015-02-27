@@ -18,11 +18,6 @@ public class QueryAnswerTest {
     }
 
     @Test
-    public void fillTheData() {
-        assertArrayEquals(data, queryAnswer.getData());
-    }
-
-    @Test
     public void answerIfPresent() {
         String actualAnswer = queryAnswer.checkValuePresent("cat");
         assertEquals("yes", actualAnswer);
@@ -37,7 +32,19 @@ public class QueryAnswerTest {
     @Test(expected = IllegalStateException.class)
     public void noAnswersPresent() {
         QueryAnswer queryAnswer = new QueryAnswer(new String[]{});
-        queryAnswer.checkValuePresent("no matter what, no values anyway");
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void questionNotCorrect() {
+        QueryAnswer queryAnswer = new QueryAnswer(new String[]{"2"});
+        queryAnswer.checkValuePresent(null);
+    }
+
+    @Test
+    public void zeroLengthArgument() {
+        QueryAnswer queryAnswer = new QueryAnswer(new String[]{"2"});
+        assertEquals("no", queryAnswer.checkValuePresent(""));
+
     }
 
     @Test
