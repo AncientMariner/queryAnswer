@@ -15,9 +15,25 @@ public class QueryAnswer {
         if (data.length == 0) {
             throw new IllegalStateException("data is not filled, not able to check");
         }
+
+        char[] valueChars = value.toCharArray();
+
         for (String element : data) {
             if (value.equals(element)) {
                 return "yes";
+            } else {
+                char[] elementChars = element.toCharArray();
+                if (elementChars.length == valueChars.length) {
+                    for (int i = 0; i < valueChars.length; i++) {
+                        if (elementChars[i] != valueChars[i]) {
+                            if (valueChars[i] == '*') {
+                                continue;
+                            } else
+                                return "no";
+                        }
+                    }
+                    return "yes";
+                }
             }
         }
         return "no";
