@@ -1,6 +1,5 @@
 package org.xander.queryAnswer;
 
-import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -15,7 +14,7 @@ public class QueryAnswer {
     }
 
     public String checkValuePresent(String value) {
-        if (Objects.isNull(value)) {
+        if (value == null) {
             throw new IllegalArgumentException("argument is not correct, please change it");
         }
 
@@ -52,7 +51,7 @@ public class QueryAnswer {
     }
 
     public String takeCareOfComplexity(String value) {
-        if (Objects.isNull(value)) {
+        if (value == null) {
             throw new IllegalArgumentException("argument is not correct, please change it");
         }
         String allInOne = toString();
