@@ -1,4 +1,4 @@
-package org.xander.queryAnswer;
+package org.xander.examples;
 
 import org.junit.Before;
 import org.junit.Test;

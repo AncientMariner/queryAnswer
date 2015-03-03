@@ -1,4 +1,4 @@
-package org.xander.queryAnswer;
+package org.xander.examples;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
